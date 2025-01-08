@@ -1,0 +1,30 @@
+data = [[float(n) for n in row.split()] for row in open("27_A.txt")]
+
+cl1 = []
+cl2 = []
+for x, y in data:
+    if y > 6:
+        cl1.append((x, y))
+    else:
+        cl2.append((x, y))
+
+center1 = (0, 0, None)
+for x1, y1 in cl1:
+    d = 0
+    for x2, y2 in cl1:
+        if x1 == x2 and y1 == y2: continue
+        
+        d += (x2 - x1) ** 2 + (y2 - y1) ** 2
+    
+    if center1[2] == None or center1[2] > d: center1 = (x1, y1, d)
+
+center2 = (0, 0, None)
+for x1, y1 in cl2:
+    d = 0
+    for x2, y2 in cl2:
+        if x1 == x2 and y1 == y2: continue
+        
+        d += (x2 - x1) ** 2 + (y2 - y1) ** 2
+    
+    if center2[2] == None or center2[2] > d: center2 = (x1, y1, d)
+print((center1[0] + center2[0]) / 2 * 10000, (center1[1] + center2[1]) / 2 * 10000)
